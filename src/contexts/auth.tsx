@@ -67,11 +67,9 @@ export function AuthProvider(props: AuthProviderProps) {
 
     api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-    if (token) {
       api.get<User>('profile').then((response) => {
         setUser(response.data);
       });
-    }
   }, []);
 
   useEffect(() => {
