@@ -13,8 +13,10 @@ app.use(cors());
 const serverHttp = http.createServer(app);
 
 const io = new Server(serverHttp, {
+  allowEIO3: true,
   cors: {
-    origin: "*",
+    origin: true,
+    credentials: true,
   },
 });
 
