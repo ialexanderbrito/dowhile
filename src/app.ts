@@ -18,6 +18,7 @@ const io = new Server(serverHttp, {
     origin: true,
     credentials: true,
   },
+  perMessageDeflate: false,
 });
 
 io.on("connection", (socket) => {
