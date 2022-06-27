@@ -17,6 +17,8 @@ const io = new Server(serverHttp, {
   cors: {
     origin: true,
     credentials: true,
+    allowedHeaders: "Content-Type, Authorization, X-Requested-With",
+    methods: "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   },
   perMessageDeflate: false,
 });
