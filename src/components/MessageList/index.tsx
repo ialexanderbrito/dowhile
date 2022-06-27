@@ -17,7 +17,7 @@ type Message = {
 
 const messagesQueue: Message[] = [];
 
-const socket = io('https://dowhile-oficial.herokuapp.com');
+const socket = io(`${import.meta.env.VITE_BACKEND_API}`);
 
 socket.on('new_message', (newMessage: Message) => {
   messagesQueue.push(newMessage);
