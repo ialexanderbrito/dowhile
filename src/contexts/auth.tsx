@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 
-import Cookies from 'js-cookie';
-
 import { api } from '../services/api';
 
 type User = {
@@ -48,7 +46,6 @@ export function AuthProvider(props: AuthProviderProps) {
     const { token, user } = response.data;
 
     localStorage.setItem('@dowhile:token', token);
-    Cookies.set('@dowhile:token', token);
 
     api.defaults.headers.common.authorization = `Bearer ${token}`;
 
@@ -58,18 +55,16 @@ export function AuthProvider(props: AuthProviderProps) {
   function signOut() {
     setUser(null);
     localStorage.removeItem('@dowhile:token');
-    Cookies.remove('@dowhile:token');
   }
 
   useEffect(() => {
-    // const token = localStorage.getItem('@dowhile:token');
-    const token = Cookies.get('@dowhile:token');
+    const token = localStorage.getItem('@dowhile:token');
 
     api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-      api.get<User>('profile').then((response) => {
-        setUser(response.data);
-      });
+    api.get<User>('profile').then((response) => {
+      setUser(response.data);
+    });
   }, []);
 
   useEffect(() => {
